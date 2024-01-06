@@ -1,5 +1,14 @@
+import Box from '@mui/material/Box';
+
 const Home = () => {
-    return (<h1>Future Home Page</h1>)
+    return (
+    <Box
+      sx={{
+        border: 1,
+        
+      }}>
+      Future Home Page
+    </Box>)
   };
   
   export default Home;
