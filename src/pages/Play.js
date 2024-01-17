@@ -107,9 +107,9 @@ const handleLogin = useCallback((username, password) => {
   return (
     <Box
       sx={{
-        border: 5,
-        borderColor: 'error.main',
-        height: '80vh',
+        // border: 5,
+        // borderColor: 'error.main',
+        height: '100vh',
         width: 1
         
       }}>

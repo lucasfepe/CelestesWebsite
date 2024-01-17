@@ -11,8 +11,8 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="play" element={<Play />} />
+          <Route index element={<Play />} />
+          {/* <Route path="play" element={<Play />} /> */}
           <Route path="contact" element={<Contact />} />
           <Route path="*" element={<NoPage />} />
         </Route>
