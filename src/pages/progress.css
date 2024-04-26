@@ -1,0 +1,82 @@
+@font-face {
+  font-family: 'Cinzel-Regular';
+  src: local('Cinzel-Regular'), url(../fonts/CinzelDecorative-Regular.ttf) format('woff');
+  /* other formats include: 'woff2', 'truetype, 'opentype',
+                            'embedded-opentype', and 'svg' */
+}
+@font-face {
+  font-family: 'Cinzel-Bold';
+  src: local('Cinzel-Bold'), url(../fonts/CinzelDecorative-Bold.ttf) format('woff');
+  /* other formats include: 'woff2', 'truetype, 'opentype',
+                            'embedded-opentype', and 'svg' */
+}
+@font-face {
+  font-family: 'Cinzel-Black';
+  src: local('Cinzel-Black'), url(../fonts/CinzelDecorative-Black.ttf) format('woff');
+  /* other formats include: 'woff2', 'truetype, 'opentype',
+                            'embedded-opentype', and 'svg' */
+}
+.progressbar{
+    margin-left:auto;
+    margin-right:auto;
+    
+  }
+
+.progress{
+    position: absolute;
+    bottom: 10%;
+    height: 30px;
+    --bs-progress-bg: #353535;  
+    
+    width: 75%;
+}
+
+.progress_bar_border{
+  position: absolute;
+    bottom: 10%;
+    height: 50px;
+    margin-bottom:-10px;
+    background-color: rgba(19, 19, 19, 0.747);  
+    margin-left: -10px;
+    width: calc(75vw + 20px);
+    border-radius: 8px;
+  
+}
+
+.bg{
+     /* The image used */
+  background-image: url("TitleBG.png");
+
+  /* Full height */
+  height: 100%; 
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.bg-success{
+    background-color: rgb(62, 89, 117) !important;
+}
+
+body {
+  padding: 20px 0 0;
+}
+
+.progress {
+   /* position: relative;  */
+}
+
+.progress-bar-text {
+  position: absolute;
+  text-align: center;
+  line-height: 30px; /* line-height should be equal to bar height */
+  overflow: hidden;
+  color: #fff;
+  left:0;
+  right:0;
+  bottom: 10%;
+  font-family: Cinzel-Black;
+  font-size:20pt;
+  color: rgb(15, 15, 15);
+}
