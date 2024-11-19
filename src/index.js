@@ -5,7 +5,6 @@ import Home from "./pages/Home";
 import Play from "./pages/Play";
 import Contact from "./pages/Contact";
 import NoPage from "./pages/NoPage";
-
 export default function App() {
   return (
     <BrowserRouter>

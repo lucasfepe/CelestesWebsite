@@ -9,15 +9,15 @@ import emailjs from 'emailjs-com';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './progress.css';
+import getParameters from './GetParameters.js';
 
 const xl = new Widget({
-  projectId: '1747c7a4-2f4e-4c89-923e-dc17328f395e',
+  projectId: process.env.REACT_APP_AWS_XSOLLA_PROJECT_ID,
   preferredLocale: 'en_US',
   callbackUrl: 'https://login.xsolla.com/api/blank'
 });
-var AmazonCognitoIdentity = require('amazon-cognito-identity-js');
-
-
+const AmazonCognitoIdentity = require('amazon-cognito-identity-js');
+const poolData = await getParameters();
 
 const Play = () => {
   const [userName, setUserName] = useState();
@@ -25,8 +25,6 @@ const Play = () => {
   const [gameVisible, setGameVisible] = useState(false);
   const [recentLogins, setRecentLogins] = useState();
   const [loadingProgressionLag, setLoadingProgressionLag] = useState(0);
-
-
   const {
     unityContext,
     unityProvider,
@@ -43,7 +41,7 @@ const Play = () => {
   });
 
   const handleLogin = useCallback((username, password) => {
-    console.log("username: " + username);
+
     setUserName(username);
     setPassWord(password);
 
@@ -55,11 +53,13 @@ const Play = () => {
     var authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(
       authenticationData
     );
-    console.log("aUTH DEETS: " + authenticationDetails);
-    var poolData = {
-      UserPoolId: 'us-east-1_CThpLlXz4', // Your user pool id here
-      ClientId: '3gqrf39ovipl4s36okr35lad9s', // Your client id here
-    };
+
+
+
+    // {
+    //   UserPoolId: 'us-east-1_CThpLlXz4', // Your user pool id here
+    //   ClientId: '3gqrf39ovipl4s36okr35lad9s', // Your client id here
+    // };
     var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
     var userData = {
       Username: username,
@@ -77,24 +77,24 @@ const Play = () => {
 
 
         AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-          IdentityPoolId: 'us-east-1:5d4d5791-ea51-4c24-a42b-d3a61568a558', // your identity pool id here
+          IdentityPoolId: process.env.REACT_APP_AWS_IDENTITY_POOL_ID, // your identity pool id here
+
           Logins: {
-            // Change the key below according to the specific region your user pool is in.
-            'cognito-idp.us-east-1.amazonaws.com/us-east-1_CThpLlXz4': result
-              .getIdToken()
-              .getJwtToken(),
-          },
+            [`cognito-idp.${process.env.AWS_REGION}
+              .amazonaws.com/${process.env.REACT_APP_AWS_USER_POOL_ID}`]:
+              result.getIdToken().getJwtToken()
+          }
         });
 
         //refreshes credentials using AWS.CognitoIdentity.getCredentialsForIdentity()
         AWS.config.credentials.refresh(error => {
           if (error) {
-            console.log("error loging in");
+
             console.error(error);
           } else {
             // Instantiate aws sdk service objects now that the credentials have been updated.
             // example: var s3 = new AWS.S3();
-            console.log('Successfully logged!');
+
           }
         });
         sendMessage("AuthenticationManager", "LoginSuccess",
@@ -117,11 +117,15 @@ const Play = () => {
     var templateParams = {
       message: 'From: ' + username + "\n" + messagea
     }
-    emailjs.send('service_bt0g4gs', 'template_yx2bshc', templateParams, 'FA7CaRkml7_QcDlG3')
+    emailjs.send(
+      process.env.REACT_APP_EMAILJS_SERVICE_ID,
+      process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
+      templateParams,
+      process.env.REACT_APP_EMAILJS_USER_ID)
       .then(function (response) {
-        console.log('SUCCESS!', response.status, response.text);
+
       }, function (err) {
-        console.log('FAILED...', err);
+
       });
 
 
@@ -162,7 +166,7 @@ const Play = () => {
   }, [addEventListener, removeEventListener, handleBuyStarbuck]);
   const getLogins = () => {
     AWS.config.region = 'us-east-1';
-    AWS.config.credentials = new AWS.CognitoIdentityCredentials({ IdentityPoolId: 'us-east-1:5d4d5791-ea51-4c24-a42b-d3a61568a558' });
+    AWS.config.credentials = new AWS.CognitoIdentityCredentials({ IdentityPoolId: process.env.REACT_APP_AWS_IDENTITY_POOL_ID });
     const cw = new AWS.CloudWatch({ apiVersion: "2010-08-01" });
     var params = {
       MetricDataQueries: [
@@ -179,17 +183,17 @@ const Play = () => {
               Dimensions: [
                 {
                   Name: "UserPool",
-                  Value: "us-east-1_CThpLlXz4"
+                  Value: poolData.UserPoolId
                 },
                 {
                   Name: "UserPoolClient",
-                  Value: "3gqrf39ovipl4s36okr35lad9s"
+                  Value: poolData.ClientId
                 }
               ]
             }
           },
 
-          AccountId: "412205003013"
+          AccountId: process.env.REACT_APP_AWS_ACCOUNT_ID
         }
       ],
       StartTime: new Date(Date.now() - 1000 * 60 * 10),
@@ -213,17 +217,17 @@ const Play = () => {
               Dimensions: [
                 {
                   Name: "UserPool",
-                  Value: "us-east-1_CThpLlXz4"
+                  Value: poolData.UserPoolId
                 },
                 {
                   Name: "UserPoolClient",
-                  Value: "3gqrf39ovipl4s36okr35lad9s"
+                  Value: poolData.ClientId
                 }
               ]
             }
           },
 
-          AccountId: "412205003013"
+          AccountId: process.env.REACT_APP_AWS_ACCOUNT_ID
         }
       ],
       StartTime: new Date(Date.now() - 1000 * 60 * 10),
@@ -239,25 +243,23 @@ const Play = () => {
     const functionone = (err, dataone) => {
 
       if (err) {
-        console.log("Error", err);
+
       } else {
-        console.log("dataone: " + JSON.stringify(dataone));
+
         users1 = dataone.MetricDataResults[0].Values.reduce((a, b) => a + b, 0);
-        console.log("recent loginsone: " + users1);
+
         cw.getMetricData(params2, functiontwo);
       }
 
     }
     const functiontwo = (err, datatwo) => {
       if (err) {
-        console.log("Error", err);
+
       } else {
         users2 = datatwo.MetricDataResults[0].Values.reduce((a, b) => a + b, 0);
-        console.log("recent loginstwo: " + users2);
-        console.log("users1: " + users1);
-        console.log("users2: " + users2);
-        console.log("new value: " + (users1 + users2))
+
         setRecentLogins(users1 + users2);
+        console.log("logins: " + (users1 + users2));
       }
     }
     cw.getMetricData(params, functionone);
@@ -269,29 +271,33 @@ const Play = () => {
   }
 
   useEffect(() => {
-    setTimeout(function(){
+    setTimeout(function () {
       setLoadingProgressionLag(loadingProgression);
-  }, 675);
-    
-  },[loadingProgression])
+    }, 675);
+
+  }, [loadingProgression])
   useEffect(() => {
-    if(isLoaded){
-      setTimeout(function(){
+    if (isLoaded) {
+      setTimeout(function () {
         setGameVisible(true);
-        }, 1000) 
-    } 
-      
-  },[isLoaded])
+      }, 2000)
+    }
+
+  }, [isLoaded])
   useEffect(() => {
+
     const interval = setInterval(() => {
       getLogins();
     }, 10000)
     return () => clearInterval(interval)
   }, [])
+  useEffect(() => {
+    setGameVisible(false);
+  }, [])
 
   useEffect(() => {
     //call some function in the game to set the recently logged in users count
-    console.log("RECENTLOGINS: " + recentLogins);
+
     if (recentLogins != null) {
       sendMessage("CloudWatch", "UpdateLogins", String(recentLogins));
     }
@@ -322,11 +328,11 @@ const Play = () => {
         <div className="bg">
           <div className="  w-75 progressbar">
             <div className="progress_bar_border"></div>
-            
-            <ProgressBar  variant="success" animated now={loadingProgression * 100} />
+
+            <ProgressBar variant="success" animated now={loadingProgression * 100} />
             <div className=" progress-bar-text">{Math.round(loadingProgressionLag * 100) + '%'}</div>
           </div>
-        
+
 
 
         </div>
@@ -338,13 +344,14 @@ const Play = () => {
       )}
 
 
-    <Unity
-          unityProvider={unityProvider}
-          style={{
-            height: '100%',
-            width: '100%',
-            visibility: gameVisible ? "visible" : "hidden"
-          }} />      
+      <Unity
+        unityProvider={unityProvider}
+        style={{
+          height: '100%',
+          width: '100%',
+          visibility: gameVisible ? "visible" : "hidden",
+          display: gameVisible ? "block" : "none"
+        }} />
       {/* <div id="xl_auth" style={{display: 'none'}}></div> 
 <button onClick={()=>showFullscreen()}>Fullscreen widget</button> */}
 
