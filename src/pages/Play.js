@@ -9,7 +9,8 @@ import emailjs from 'emailjs-com';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './progress.css';
-import getParameters from './GetParameters.js';
+import { getLogins, users } from './GetLogins.js'
+import ssmParams from "./GetParameters.js";
 
 const xl = new Widget({
   projectId: process.env.REACT_APP_AWS_XSOLLA_PROJECT_ID,
@@ -17,7 +18,6 @@ const xl = new Widget({
   callbackUrl: 'https://login.xsolla.com/api/blank'
 });
 const AmazonCognitoIdentity = require('amazon-cognito-identity-js');
-const poolData = await getParameters();
 
 const Play = () => {
   const [userName, setUserName] = useState();
@@ -60,7 +60,10 @@ const Play = () => {
     //   UserPoolId: 'us-east-1_CThpLlXz4', // Your user pool id here
     //   ClientId: '3gqrf39ovipl4s36okr35lad9s', // Your client id here
     // };
-    var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+    var userPool = new AmazonCognitoIdentity.CognitoUserPool({
+      UserPoolId: ssmParams.UserPoolId,
+      ClientId: ssmParams.ClientId
+    });
     var userData = {
       Username: username,
       Pool: userPool,
@@ -164,111 +167,7 @@ const Play = () => {
       removeEventListener("BuyStarbuck", handleBuyStarbuck);
     };
   }, [addEventListener, removeEventListener, handleBuyStarbuck]);
-  const getLogins = () => {
-    AWS.config.region = 'us-east-1';
-    AWS.config.credentials = new AWS.CognitoIdentityCredentials({ IdentityPoolId: process.env.REACT_APP_AWS_IDENTITY_POOL_ID });
-    const cw = new AWS.CloudWatch({ apiVersion: "2010-08-01" });
-    var params = {
-      MetricDataQueries: [
-        {
-          Id: "m1",
-          ReturnData: true,
-          MetricStat: {
-            Period: 1,
 
-            Stat: "Sum",
-            Metric: {
-              Namespace: "AWS/Cognito",
-              MetricName: "SignInSuccesses",
-              Dimensions: [
-                {
-                  Name: "UserPool",
-                  Value: poolData.UserPoolId
-                },
-                {
-                  Name: "UserPoolClient",
-                  Value: poolData.ClientId
-                }
-              ]
-            }
-          },
-
-          AccountId: process.env.REACT_APP_AWS_ACCOUNT_ID
-        }
-      ],
-      StartTime: new Date(Date.now() - 1000 * 60 * 10),
-      EndTime: (new Date()).toISOString()
-
-
-
-    };
-    var params2 = {
-      MetricDataQueries: [
-        {
-          Id: "m1",
-          ReturnData: true,
-          MetricStat: {
-            Period: 1,
-
-            Stat: "Sum",
-            Metric: {
-              Namespace: "AWS/Cognito",
-              MetricName: "TokenRefreshSuccesses",
-              Dimensions: [
-                {
-                  Name: "UserPool",
-                  Value: poolData.UserPoolId
-                },
-                {
-                  Name: "UserPoolClient",
-                  Value: poolData.ClientId
-                }
-              ]
-            }
-          },
-
-          AccountId: process.env.REACT_APP_AWS_ACCOUNT_ID
-        }
-      ],
-      StartTime: new Date(Date.now() - 1000 * 60 * 10),
-      EndTime: (new Date()).toISOString()
-
-
-
-    };
-    let users1 = 0;
-    let users2 = 0;
-
-
-    const functionone = (err, dataone) => {
-
-      if (err) {
-
-      } else {
-
-        users1 = dataone.MetricDataResults[0].Values.reduce((a, b) => a + b, 0);
-
-        cw.getMetricData(params2, functiontwo);
-      }
-
-    }
-    const functiontwo = (err, datatwo) => {
-      if (err) {
-
-      } else {
-        users2 = datatwo.MetricDataResults[0].Values.reduce((a, b) => a + b, 0);
-
-        setRecentLogins(users1 + users2);
-        console.log("logins: " + (users1 + users2));
-      }
-    }
-    cw.getMetricData(params, functionone);
-
-
-
-
-
-  }
 
   useEffect(() => {
     setTimeout(function () {
@@ -288,6 +187,7 @@ const Play = () => {
 
     const interval = setInterval(() => {
       getLogins();
+      setRecentLogins(users);
     }, 10000)
     return () => clearInterval(interval)
   }, [])
