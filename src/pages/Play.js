@@ -232,17 +232,8 @@ const Play = () => {
             <ProgressBar variant="success" animated now={loadingProgression * 100} />
             <div className=" progress-bar-text">{Math.round(loadingProgressionLag * 100) + '%'}</div>
           </div>
-
-
-
         </div>
-
-
-
-
-
       )}
-
 
       <Unity
         unityProvider={unityProvider}
