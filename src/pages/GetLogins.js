@@ -2,7 +2,7 @@ import cw from './CloudWatchService.js'
 import ssmParams from './GetParameters.js'
 let users1 = 0;
 let users2 = 0;
-let users;
+let users = 0;
 const getLogins = () => {
 
     var params = {
@@ -83,7 +83,7 @@ const functionone = async (err, dataone) => {
     }
 }
 
-const functiontwo = async (err, datatwo) => {
+const functiontwo = (err, datatwo) => {
     if (err) {
 
     } else {

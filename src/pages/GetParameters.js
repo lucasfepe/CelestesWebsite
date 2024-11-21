@@ -1,13 +1,8 @@
 
 import { SSMClient, GetParameterCommand } from "@aws-sdk/client-ssm";
+import { getParameter } from "utils/ParameterStore";
 
-const ssmClient = new SSMClient({
-    region: process.env.REACT_APP_AWS_REGION,
-    credentials: {
-        accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY_ID,
-        secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY
-    }
-});
+
 class SSMParams {
     UserPoolId;
     ClientId;
@@ -16,19 +11,12 @@ const ssmParams = new SSMParams();
 // async function getParameters() {
 try {
     // Add AWS credentials configuration
-    const userPoolIdParam = await ssmClient.send(
-        new GetParameterCommand({
-            Name: "UserPoolId",
-        })
-    );
+    const userPoolIdParam = await getParameter("UserPoolId");
 
-    const clientIdParam = await ssmClient.send(
-        new GetParameterCommand({
-            Name: "UserPoolClientId",
-        })
-    );
-    ssmParams.UserPoolId = userPoolIdParam.Parameter.Value;
-    ssmParams.ClientId = clientIdParam.Parameter.Value;
+    const clientIdParam = await getParameter("UserPoolClientId");
+
+    ssmParams.UserPoolId = userPoolIdParam;
+    ssmParams.ClientId = clientIdParam;
 
 } catch (error) {
     console.error("Error fetching parameters:", error);

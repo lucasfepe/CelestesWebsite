@@ -2,9 +2,10 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./pages/Layout";
 import Home from "./pages/Home";
-import Play from "./pages/Play";
+// import Play from "./pages/Play";
 import Contact from "./pages/Contact";
 import NoPage from "./pages/NoPage";
+import Play from "./pages/NewPlay";
 export default function App() {
   return (
     <BrowserRouter>

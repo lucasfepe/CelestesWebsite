@@ -1,7 +1,5 @@
 import { Unity, useUnityContext } from "react-unity-webgl";
 import Box from '@mui/material/Box';
-import CircularProgress from '@mui/material/CircularProgress';
-import Fragment from 'react'
 import { useEffect, useState, useCallback } from "react";
 import * as AWS from 'aws-sdk';
 import { Widget } from '@xsolla/login-sdk';
@@ -12,11 +10,11 @@ import './progress.css';
 import { getLogins, users } from './GetLogins.js'
 import ssmParams from "./GetParameters.js";
 
-const xl = new Widget({
+/* const xl = new Widget({
   projectId: process.env.REACT_APP_AWS_XSOLLA_PROJECT_ID,
   preferredLocale: 'en_US',
   callbackUrl: 'https://login.xsolla.com/api/blank'
-});
+}); */
 const AmazonCognitoIdentity = require('amazon-cognito-identity-js');
 
 const Play = () => {
@@ -56,10 +54,7 @@ const Play = () => {
 
 
 
-    // {
-    //   UserPoolId: 'us-east-1_CThpLlXz4', // Your user pool id here
-    //   ClientId: '3gqrf39ovipl4s36okr35lad9s', // Your client id here
-    // };
+
     var userPool = new AmazonCognitoIdentity.CognitoUserPool({
       UserPoolId: ssmParams.UserPoolId,
       ClientId: ssmParams.ClientId
@@ -78,8 +73,8 @@ const Play = () => {
         var refreshToken = result.getRefreshToken().getToken();
         //POTENTIAL: Region needs to be set if not already set previously elsewhere.
 
-
-        AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+        //FOR SOME REASON THIS SECTION DIDN'T GET TRANSFERED TO REFACTOR LETS SEE IF I ACTUALLY NEED IT
+        /* AWS.config.credentials = new AWS.CognitoIdentityCredentials({
           IdentityPoolId: process.env.REACT_APP_AWS_IDENTITY_POOL_ID, // your identity pool id here
 
           Logins: {
@@ -99,7 +94,7 @@ const Play = () => {
             // example: var s3 = new AWS.S3();
 
           }
-        });
+        }); */
         sendMessage("AuthenticationManager", "LoginSuccess",
           idToken + "@@!@@" + accessToken + "@@!@@" + refreshToken
         );
@@ -203,15 +198,15 @@ const Play = () => {
     }
 
   }, [recentLogins]);
-  xl.mount('xl_auth');
+  // xl.mount('xl_auth');
 
-  const showFullscreen = () => {
+  /* const showFullscreen = () => {
     alert("hi")
     const myDiv = document.querySelector('#xl_auth');
     myDiv.style.display = 'block';
 
     xl.open();
-  }
+  } */
 
   return (
     <Box

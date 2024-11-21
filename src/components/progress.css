@@ -28,8 +28,8 @@
 .progress {
   position: absolute;
   bottom: 10%;
-  height: 30px;
-  --bs-progress-bg: #353535;
+  height: 30px !important;
+  --bs-progress-bg: #353535 !important;
 
   width: 75%;
 }
@@ -39,7 +39,7 @@
   bottom: 10%;
   height: 50px;
   margin-bottom: -10px;
-  background-color: rgba(19, 19, 19, 0.747);
+  background-color: rgba(19, 19, 19, 0.747) !important;
   margin-left: -10px;
   width: calc(75vw + 20px);
   border-radius: 8px;
@@ -59,7 +59,7 @@
   background-size: cover;
 }
 
-.bg-success-1:first-child {
+.bg-success {
   background-color: rgb(62, 89, 117) !important;
 }
 
@@ -67,21 +67,19 @@ body {
   padding: 20px 0 0;
 }
 
-.progress {
-  /* position: relative;  */
-}
+
 
 .progress-bar-text {
   position: absolute;
   text-align: center;
-  line-height: 30px;
+  line-height: 30px !important;
   /* line-height should be equal to bar height */
   overflow: hidden;
-  color: #fff;
+  color: #fff !important;
   left: 0;
   right: 0;
   bottom: 10%;
   font-family: Cinzel-Black;
   font-size: 20pt;
-  color: rgb(15, 15, 15);
+  color: rgb(15, 15, 15) !important;
 }
