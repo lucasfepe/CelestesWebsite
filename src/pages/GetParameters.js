@@ -1,7 +1,5 @@
 
-import { SSMClient, GetParameterCommand } from "@aws-sdk/client-ssm";
-import { getParameter } from "utils/ParameterStore";
-
+import API from 'utils/API';
 
 class SSMParams {
     UserPoolId;
@@ -11,9 +9,15 @@ const ssmParams = new SSMParams();
 // async function getParameters() {
 try {
     // Add AWS credentials configuration
-    const userPoolIdParam = await getParameter("UserPoolId");
+    const userPoolIdParam = await API.get('/getparameter',
+        {
+            "parameterName": "UserPoolId"
+        });
+    const clientIdParam = await API.get('/getparameter',
+        {
+            "parameterName": "UserPoolClientId"
+        });
 
-    const clientIdParam = await getParameter("UserPoolClientId");
 
     ssmParams.UserPoolId = userPoolIdParam;
     ssmParams.ClientId = clientIdParam;

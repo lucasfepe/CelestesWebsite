@@ -1,6 +1,4 @@
 
-import { getParameter } from '../utils/ParameterStore';
-import * as AWS from 'aws-sdk';
 import ssmParams from '../pages/GetParameters';
 const AmazonCognitoIdentity = require('amazon-cognito-identity-js');
 
@@ -33,6 +31,7 @@ export class AuthService {
     }
 
     getTokens(result) {
+        console.log("SUCCEEDED");
         return {
             accessToken: result.getAccessToken().getJwtToken(),
             idToken: result.getIdToken().getJwtToken(),

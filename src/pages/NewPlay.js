@@ -27,6 +27,7 @@ const Play = () => {
 
     const handleLogin = useCallback(async (username, password) => {
         try {
+            console.log("success1");
             const tokens = await authService.authenticateUser(username, password);
             sendMessage(
                 "AuthenticationManager",
@@ -34,6 +35,7 @@ const Play = () => {
                 `${tokens.idToken}@@!@@${tokens.accessToken}@@!@@${tokens.refreshToken}`
             );
         } catch (error) {
+            console.log("sfail1");
             sendMessage("MessageContainer", "SetMessageText", error.message);
         }
     }, [sendMessage]);
@@ -111,6 +113,14 @@ const Play = () => {
         return () => clearInterval(interval);
     }, []);
 
+    // useEffect(() => {
+    //     //call some function in the game to set the recently logged in users count
+
+    //     if (recentLogins != null) {
+    //         sendMessage("CloudWatch", "UpdateLogins", String(recentLogins));
+    //     }
+
+    // }, [recentLogins]);
 
 
 
