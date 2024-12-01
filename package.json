@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "@aws-sdk/client-cognito-identity-provider": "^3.485.0",
-    "@aws-sdk/client-ssm": "^3.693.0",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.15.0",
