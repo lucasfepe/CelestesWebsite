@@ -31,7 +31,6 @@ export class AuthService {
     }
 
     getTokens(result) {
-        console.log("SUCCEEDED");
         return {
             accessToken: result.getAccessToken().getJwtToken(),
             idToken: result.getIdToken().getJwtToken(),
