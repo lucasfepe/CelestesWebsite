@@ -1,70 +1,38 @@
-# Getting Started with Create React App
+# Celestes CCG - WebGL Game & AWS Integration
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 🌟 Overview  
+**Celestes CCG** is a fantasy-world **turn-based strategy card game** featuring **100+ unique cards**, each with special skills and mechanics. Players compete in a ranking system for **weekly rewards**, strategizing their decks to dominate opponents.  
 
-## Available Scripts
+This repository contains the **WebGL game build** and the **React-based website** that integrates with AWS cloud services for **scalability, security, and performance**.  
 
-In the project directory, you can run:
+## 🚀 Key Features  
 
-### `npm start`
+### 🔹 WebGL Game Hosting  
+- Hosted on **Amazon S3** with **CloudFront** for optimized global content delivery.  
+- Custom domain & SSL security managed via **Route 53** and **Certificate Manager**.  
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 🔹 Authentication & User Management  
+- **AWS Cognito** handles identity pools, user authentication, and API security.  
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 🔹 Game Backend Services  
+- **Unity Gaming Services** for matchmaking, relay, lobby, and multiplayer hosting.  
+- Backend powered by **AWS Unity SDK** and **API Gateway + Lambda Functions**.  
 
-### `npm test`
+### 🔹 Data Storage & Configuration  
+- **DynamoDB** stores game data.  
+- **AWS Systems Manager** manages configuration and secrets.  
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 🔹 Monitoring & Logging  
+- **AWS CloudWatch** tracks performance, logs errors, and sets up alarms.  
 
-### `npm run build`
+### 🔹 CI/CD Pipeline  
+- **AWS CodePipeline & CodeBuild** automate deployment from the **CelestesWebsite Repository** to **S3**.  
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 🔹 React Frontend  
+- Built using **React-Unity-WebGL**.  
+- Uses modern frameworks like **Bootstrap, Axios, and EmailJS** for an interactive experience.  
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+> 📖 **Read more about the creation of this project:**  
+> [How I Used AWS and Amazon Q to Build Celestes CCG](https://community.aws/content/2q6EsAajxIGYTmcpQgvesusJwEs/how-i-used-aws-and-amazon-q-to-build-celestes-ccg)  
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
