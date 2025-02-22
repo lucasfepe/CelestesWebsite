@@ -5,6 +5,8 @@
 
 This repository contains the **WebGL game build** and the **React-based website** that integrates with AWS cloud services for **scalability, security, and performance**.  
 
+---
+
 ## 🚀 Key Features  
 
 ### 🔹 WebGL Game Hosting  
@@ -32,13 +34,20 @@ This repository contains the **WebGL game build** and the **React-based website*
 - Built using **React-Unity-WebGL**.  
 - Uses modern frameworks like **Bootstrap, Axios, and EmailJS** for an interactive experience.  
 
-> 📖 **Read more about the creation of this project:**  
-> [How I Used AWS and Amazon Q to Build Celestes CCG](https://community.aws/content/2q6EsAajxIGYTmcpQgvesusJwEs/how-i-used-aws-and-amazon-q-to-build-celestes-ccg)  
+---
 
-> 🎥 **Watch the game demo on YouTube:**  
-> [Celestes CCG - Game Demo](https://www.youtube.com/watch?v=cL0chb_wsfI)
+## 📚 Learn More  
 
-Archiutecture Diagram:
-![Celestes CCG Architecture](public/CloudArchitecture.png)
+📖 **Read more about the creation of this project:**  
+[How I Used AWS and Amazon Q to Build Celestes CCG](https://community.aws/content/2q6EsAajxIGYTmcpQgvesusJwEs/how-i-used-aws-and-amazon-q-to-build-celestes-ccg)  
+
+🎥 **Watch the game demo on YouTube:**  
+[Celestes CCG - Game Demo](https://www.youtube.com/watch?v=cL0chb_wsfI)  
 
 ---
+
+## 🏗️ Architecture Diagram  
+
+The diagram below illustrates how **Celestes CCG** integrates various AWS services for **game hosting, authentication, backend services, and CI/CD deployment**.  
+
+![Celestes CCG Architecture](public/CloudArchitecture.png)
