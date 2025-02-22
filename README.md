@@ -39,6 +39,6 @@ This repository contains the **WebGL game build** and the **React-based website*
 > [Celestes CCG - Game Demo](https://www.youtube.com/watch?v=cL0chb_wsfI)
 
 Archiutecture Diagram:
-![Celestes CCG Architecture](public/CelestesCCG Cloud Technologies.png)
+![Celestes CCG Architecture](public/CloudArchitecture.png)
 
 ---
