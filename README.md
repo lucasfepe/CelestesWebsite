@@ -35,4 +35,10 @@ This repository contains the **WebGL game build** and the **React-based website*
 > 📖 **Read more about the creation of this project:**  
 > [How I Used AWS and Amazon Q to Build Celestes CCG](https://community.aws/content/2q6EsAajxIGYTmcpQgvesusJwEs/how-i-used-aws-and-amazon-q-to-build-celestes-ccg)  
 
+> 🎥 **Watch the game demo on YouTube:**  
+> [Celestes CCG - Game Demo](https://www.youtube.com/watch?v=cL0chb_wsfI)
+
+Archiutecture Diagram:
+![Celestes CCG Architecture](assets/celestes-architecture.png)
+
 ---
